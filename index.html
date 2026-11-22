@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartClass - Jadwal Kuliah</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HALAMAN LOGIN -->
+    <div class="auth-container" id="loginPage">
+        <div class="auth-box">
+
+            <div class="logo">🎓</div>
+            <h1>SmartClass</h1>
+            <p>Aplikasi Jadwal Kuliah Pintar</p>
+
+            <form id="loginForm">
+
+                <input type="email" id="loginEmail"
+                    placeholder="Masukkan email" required>
+
+                <!-- PASSWORD LOGIN -->
+                <div class="password-wrapper">
+                    <input type="password" id="loginPassword"
+                        placeholder="Masukkan password" required>
+
+                    <button type="button"
+                        class="toggle-password"
+                        data-target="loginPassword">
+                        👁️
+                    </button>
+                </div>
+
+                <button type="submit" class="main-button">
+                    Login
+                </button>
+
+            </form>
+
+            <p>Belum punya akun?
+                <a href="#" id="showRegister">Daftar sekarang</a>
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- HALAMAN REGISTER -->
+    <div class="auth-container hidden" id="registerPage">
+        <div class="auth-box">
+
+            <div class="logo">📝</div>
+            <h1>Buat Akun</h1>
+            <p>Daftar untuk menggunakan SmartClass</p>
+
+            <form id="registerForm">
+
+                <input type="text" id="regName"
+                    placeholder="Nama lengkap" required>
+
+                <input type="email" id="regEmail"
+                    placeholder="Masukkan email" required>
+
+                <!-- PASSWORD REGISTER -->
+                <div class="password-wrapper">
+                    <input type="password" id="regPassword"
+                        placeholder="Password minimal 6 karakter"
+                        minlength="6" required>
+
+                    <button type="button"
+                        class="toggle-password"
+                        data-target="regPassword">
+                        👁️
+                    </button>
+                </div>
+
+                <button type="submit" class="main-button">
+                    Daftar
+                </button>
+
+            </form>
+
+            <p>Sudah punya akun?
+                <a href="#" id="showLogin">Login sekarang</a>
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- HALAMAN DASHBOARD -->
+    <div class="dashboard hidden" id="dashboardPage">
+
+        <!-- HEADER -->
+        <header>
+            <div>
+                <h1>🎓 SmartClass</h1>
+                <p>Jadwal Perkuliahan Pintar</p>
+            </div>
+
+            <button id="logoutBtn" class="logout">
+                Logout
+            </button>
+        </header>
+
+
+        <!-- SAMBUTAN -->
+        <section class="welcome">
+            <h2>Halo, <span id="userName"></span>! 👋</h2>
+            <p>Selamat datang di dashboard perkuliahanmu.</p>
+            <p id="tanggal"></p>
+        </section>
+
+
+        <!-- STATISTIK -->
+        <section class="statistics">
+
+            <div class="stat-card">
+                <div>📚</div>
+                <h2 id="totalJadwal">0</h2>
+                <p>Total Jadwal</p>
+            </div>
+
+            <div class="stat-card">
+                <div>📅</div>
+                <h2 id="totalHari">0</h2>
+                <p>Hari Kuliah</p>
+            </div>
+
+            <div class="stat-card">
+                <div>👨‍🏫</div>
+                <h2 id="totalDosen">0</h2>
+                <p>Total Dosen</p>
+            </div>
+
+        </section>
+
+
+        <!-- FORM JADWAL -->
+        <section class="content">
+
+            <h2 id="formTitle">➕ Tambah Jadwal Kuliah</h2>
+
+            <form id="jadwalForm">
+
+                <input type="hidden" id="editId">
+
+                <label>Mata Kuliah</label>
+                <input type="text" id="matkul"
+                    placeholder="Contoh: Analisis Real" required>
+
+                <label>Nama Dosen</label>
+                <input type="text" id="dosen"
+                    placeholder="Masukkan nama dosen" required>
+
+                <label>Hari</label>
+                <select id="hari" required>
+                    <option value="">Pilih Hari</option>
+                    <option>Senin</option>
+                    <option>Selasa</option>
+                    <option>Rabu</option>
+                    <option>Kamis</option>
+                    <option>Jumat</option>
+                    <option>Sabtu</option>
+                </select>
+
+                <label>Jam Mulai</label>
+                <input type="time" id="jamMulai" required>
+
+                <label>Jam Selesai</label>
+                <input type="time" id="jamSelesai" required>
+
+                <label>Ruangan</label>
+                <input type="text" id="ruangan"
+                    placeholder="Contoh: Ruang 2A" required>
+
+                <button type="submit" class="main-button" id="submitBtn">
+                    + Simpan Jadwal
+                </button>
+
+                <button type="button" id="cancelEdit"
+                    class="cancel hidden">
+                    Batal Edit
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- DAFTAR JADWAL -->
+        <section class="content">
+
+            <h2>📖 Jadwal Perkuliahan Saya</h2>
+
+            <label>Filter Hari</label>
+
+            <select id="filterHari">
+                <option value="Semua">Semua Hari</option>
+                <option>Senin</option>
+                <option>Selasa</option>
+                <option>Rabu</option>
+                <option>Kamis</option>
+                <option>Jumat</option>
+                <option>Sabtu</option>
+            </select>
+
+            <div id="jadwalList"></div>
+
+        </section>
+
+        <footer>
+            © 2026 SmartClass | Jadwal Kuliah Pintar
+        </footer>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
